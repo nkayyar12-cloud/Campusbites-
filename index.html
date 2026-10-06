@@ -1,268 +1,335 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CampusBite | College Canteen Pre-Order</title>
-  <meta name="description" content="College canteen pre-order website for snacks, drinks and quick pickup." />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>CampusBites - College Canteen</title>
+
   <style>
-    :root{
-      --bg:#f7f8fc;
-      --card:#ffffff;
-      --text:#18202a;
-      --muted:#6b7280;
-      --primary:#5b5cf0;
-      --primary-dark:#4546c7;
-      --accent:#ffb703;
-      --success:#159957;
-      --danger:#d64545;
-      --border:#e6e8ef;
-      --shadow:0 12px 30px rgba(24,32,42,.08);
-      --radius:18px;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
     }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
-    button,input,select{font:inherit}
-    button{cursor:pointer}
-    .container{width:min(1180px,92%);margin:auto}
-    .topbar{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(230,232,239,.9)}
-    nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-    .brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:20px;text-decoration:none;color:var(--text)}
-    .logo{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,var(--primary),#7c4dff);color:#fff;box-shadow:0 8px 20px rgba(91,92,240,.25);font-size:22px}
-    .navlinks{display:flex;align-items:center;gap:8px}
-    .navlinks a{padding:10px 13px;border-radius:10px;text-decoration:none;color:#4b5563;font-weight:600}
-    .navlinks a:hover{background:#f0f1ff;color:var(--primary)}
-    .cart-btn{border:0;background:var(--text);color:#fff;padding:11px 15px;border-radius:12px;font-weight:700;display:flex;align-items:center;gap:8px}
-    .badge{min-width:21px;height:21px;padding:0 6px;border-radius:999px;display:grid;place-items:center;background:var(--accent);color:#111;font-size:12px}
 
-    .hero{padding:74px 0 48px;background:radial-gradient(circle at 90% 10%,rgba(91,92,240,.15),transparent 34%),linear-gradient(180deg,#fff 0%,#f7f8fc 100%)}
-    .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:34px;align-items:center}
-    .eyebrow{display:inline-flex;align-items:center;gap:8px;background:#eeefff;color:var(--primary);padding:8px 12px;border-radius:999px;font-size:13px;font-weight:800}
-    h1{font-size:clamp(38px,6vw,64px);line-height:1.02;margin:17px 0 16px;letter-spacing:-2px}
-    .hero p{font-size:18px;line-height:1.65;color:var(--muted);max-width:660px}
-    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}
-    .btn{border:0;border-radius:13px;padding:13px 18px;font-weight:800;transition:.2s;display:inline-flex;align-items:center;justify-content:center;gap:8px}
-    .btn-primary{background:var(--primary);color:#fff;box-shadow:0 9px 20px rgba(91,92,240,.2)}
-    .btn-primary:hover{background:var(--primary-dark);transform:translateY(-1px)}
-    .btn-light{background:#fff;color:var(--text);border:1px solid var(--border)}
-    .btn-light:hover{border-color:#cfd3e1}
-    .hero-card{background:#12172c;color:#fff;border-radius:28px;padding:26px;box-shadow:0 20px 50px rgba(18,23,44,.22);position:relative;overflow:hidden}
-    .hero-card:before{content:"";position:absolute;width:250px;height:250px;border-radius:50%;background:rgba(124,77,255,.25);right:-60px;top:-60px}
-    .hero-card h3{margin:0 0 10px;font-size:22px}.hero-card p{color:#c9cee0;font-size:14px;margin:0 0 24px}.mini-order{display:grid;gap:12px}
-    .mini-row{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.06);padding:13px 14px;border-radius:14px}.mini-row span:last-child{font-weight:800}
+    body {
+      background: #f5f7fb;
+      color: #222;
+    }
 
-    section{padding:58px 0}.section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:23px}.section-head h2{font-size:34px;margin:0;letter-spacing:-.8px}.section-head p{margin:6px 0 0;color:var(--muted)}
-    .chips{display:flex;gap:9px;flex-wrap:wrap}.chip{border:1px solid var(--border);background:#fff;color:#5b6472;padding:9px 13px;border-radius:999px;font-weight:700}.chip.active,.chip:hover{background:#eeefff;border-color:#dddfff;color:var(--primary)}
-    .menu-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
-    .item-card{overflow:hidden;display:flex;flex-direction:column}.item-visual{height:150px;display:grid;place-items:center;font-size:62px;background:linear-gradient(135deg,#f1f2ff,#fff8e8)}
-    .item-body{padding:17px}.item-top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}.item-name{font-size:18px;font-weight:800;margin:0}.price{font-weight:900;color:var(--primary)}
-    .item-desc{font-size:13px;line-height:1.5;color:var(--muted);min-height:40px;margin:8px 0 13px}.add-btn{width:100%;border:0;background:#111827;color:#fff;padding:11px;border-radius:11px;font-weight:800}.add-btn:hover{background:#272f3c}
+    header {
+      background: #ff6b35;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
 
-    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.step{padding:22px;background:#fff;border:1px solid var(--border);border-radius:18px}.step-no{width:36px;height:36px;border-radius:11px;background:#eeefff;color:var(--primary);display:grid;place-items:center;font-weight:900;margin-bottom:13px}.step h3{margin:0 0 7px}.step p{color:var(--muted);margin:0;line-height:1.55}
+    header h1 {
+      font-size: 32px;
+    }
 
-    .checkout{background:#151a30;color:#fff;border-radius:28px;padding:28px}.checkout-grid{display:grid;grid-template-columns:1fr 1fr;gap:25px}.checkout h2{margin:0 0 7px;font-size:30px}.checkout p.lead{color:#c7cada;margin-top:0}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:grid;gap:7px}.field.full{grid-column:1/-1}.field label{font-size:13px;font-weight:800;color:#dbe0ef}.field input,.field select{border:1px solid #343b58;background:#202641;color:#fff;border-radius:11px;padding:12px 13px;outline:none}.field input:focus,.field select:focus{border-color:#8588ff;box-shadow:0 0 0 3px rgba(133,136,255,.14)}
-    .summary{background:#202641;border:1px solid #343b58;border-radius:18px;padding:16px}.summary h3{margin:0 0 12px}.summary-list{display:grid;gap:10px;max-height:240px;overflow:auto}.summary-row{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center}.summary-row small{color:#bfc6da}.qty-pill{background:#303752;padding:3px 8px;border-radius:999px;font-size:12px}.sum-total{border-top:1px solid #343b58;padding-top:12px;margin-top:14px;display:flex;justify-content:space-between;font-size:20px;font-weight:900}.paybox{margin-top:16px;padding:15px;border-radius:14px;background:#191e37;border:1px solid #343b58}.paybox h4{margin:0 0 10px}.pay-options{display:flex;gap:9px;flex-wrap:wrap}.pay-option{display:flex;align-items:center;gap:8px;background:#252b47;padding:9px 11px;border-radius:10px;font-size:13px}.pay-note{font-size:12px;color:#aeb6cf;margin-top:9px}.place-order{width:100%;margin-top:16px}
+    header p {
+      margin-top: 5px;
+    }
 
-    .dashboard{margin-top:20px}.dashboard-head{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}.status-badge{padding:7px 10px;border-radius:999px;font-size:12px;font-weight:900}.status-new{background:#fff1c7;color:#7b5600}.status-preparing{background:#e8efff;color:#2e57ad}.status-ready{background:#dcf8e9;color:#08783d}.status-completed{background:#eceef2;color:#5f6673}
-    .orders-table-wrap{overflow:auto;border:1px solid var(--border);border-radius:16px;background:#fff}.orders-table{width:100%;border-collapse:collapse;min-width:780px}.orders-table th,.orders-table td{text-align:left;padding:14px 16px;border-bottom:1px solid var(--border);vertical-align:top}.orders-table th{font-size:12px;color:#6b7280;text-transform:uppercase;letter-spacing:.6px}.orders-table tr:last-child td{border-bottom:0}.order-items{font-size:13px;color:#60697a;line-height:1.5}.status-select{border:1px solid var(--border);border-radius:9px;padding:8px;background:#fff}
+    .container {
+      max-width: 1000px;
+      margin: 25px auto;
+      padding: 15px;
+    }
 
-    footer{padding:38px 0 55px;color:#737b8d;text-align:center;font-size:13px}
-    .empty{padding:22px;text-align:center;color:#737b8d}.toast{position:fixed;right:18px;bottom:18px;background:#111827;color:#fff;padding:13px 16px;border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.2);transform:translateY(20px);opacity:0;pointer-events:none;transition:.25s;z-index:80;font-weight:700}.toast.show{transform:translateY(0);opacity:1}
-    .drawer-backdrop{position:fixed;inset:0;background:rgba(5,10,20,.42);display:none;z-index:60}.drawer-backdrop.show{display:block}.drawer{position:absolute;right:0;top:0;height:100%;width:min(420px,92%);background:#fff;padding:22px;display:flex;flex-direction:column;box-shadow:-15px 0 40px rgba(0,0,0,.14)}.drawer-head{display:flex;justify-content:space-between;align-items:center}.icon-btn{width:38px;height:38px;border:1px solid var(--border);background:#fff;border-radius:10px}.drawer-items{margin:17px 0;display:grid;gap:11px;overflow:auto}.drawer-item{display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center;padding:12px;border:1px solid var(--border);border-radius:13px}.drawer-item small{display:block;color:var(--muted);margin-top:3px}.qty-controls{display:flex;align-items:center;gap:6px}.qty-controls button{width:28px;height:28px;border-radius:8px;border:1px solid var(--border);background:#fff}.drawer-footer{margin-top:auto;border-top:1px solid var(--border);padding-top:14px}.drawer-footer .row{display:flex;justify-content:space-between;margin-bottom:12px}.muted{color:var(--muted)}
-    .order-success{display:none;padding:18px;border-radius:15px;background:#e9fff3;color:#096b38;border:1px solid #b9efcf;margin-top:15px}.order-success.show{display:block}
-    @media (max-width:980px){.hero-grid,.checkout-grid{grid-template-columns:1fr}.menu-grid{grid-template-columns:repeat(2,1fr)}}
-    @media (max-width:640px){nav{height:64px}.navlinks{display:none}.hero{padding-top:48px}.hero-card{padding:22px}.menu-grid,.steps,.form-grid{grid-template-columns:1fr}.section-head{align-items:flex-start;flex-direction:column}.item-visual{height:135px}.checkout{padding:20px}.summary-row{grid-template-columns:1fr auto}.summary-row .qty-pill{order:3;grid-column:2}.field.full{grid-column:auto}}
+    h2 {
+      margin-bottom: 15px;
+    }
+
+    .items {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+    }
+
+    .item {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .item .emoji {
+      font-size: 45px;
+    }
+
+    .item h3 {
+      margin: 10px 0;
+    }
+
+    .price {
+      color: #ff6b35;
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+
+    button {
+      border: none;
+      background: #ff6b35;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #e85a25;
+    }
+
+    .order-box {
+      background: white;
+      margin-top: 30px;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    #cart {
+      margin: 15px 0;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .total {
+      font-size: 20px;
+      font-weight: bold;
+      margin: 15px 0;
+    }
+
+    #message {
+      margin-top: 15px;
+      font-weight: bold;
+      color: green;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      margin-top: 30px;
+      background: #222;
+      color: white;
+    }
   </style>
 </head>
+
 <body>
-  <header class="topbar">
-    <div class="container">
-      <nav>
-        <a class="brand" href="#home"><span class="logo">☕</span><span>CampusBite</span></a>
-        <div class="navlinks">
-          <a href="#menu">Menu</a><a href="#how">How it works</a><a href="#canteen">Canteen</a>
-        </div>
-        <button class="cart-btn" id="openCart">Cart <span class="badge" id="cartCount">0</span></button>
-      </nav>
-    </div>
+
+  <header>
+    <h1>🍴 CampusBites</h1>
+    <p>College Canteen Pre-Order</p>
   </header>
 
-  <main>
-    <section class="hero" id="home">
-      <div class="container hero-grid">
-        <div>
-          <span class="eyebrow">⚡ Skip the canteen queue</span>
-          <h1>Pre-order your snacks before you reach the canteen.</h1>
-          <p>Choose your favourite tea, coffee, samosa, puffs and more. Enter your student details, confirm your order and collect it when it is ready.</p>
-          <div class="hero-actions"><a class="btn btn-primary" href="#menu">Browse snacks →</a><a class="btn btn-light" href="#checkout">Go to payment</a></div>
-        </div>
-        <div class="hero-card">
-          <h3>Today’s quick order</h3>
-          <p>Simple ordering for students and easy order tracking for the canteen.</p>
-          <div class="mini-order">
-            <div class="mini-row"><span>☕ Filter Coffee</span><span>₹20</span></div>
-            <div class="mini-row"><span>🥟 Samosa</span><span>₹15</span></div>
-            <div class="mini-row"><span>🥐 Veg Puff</span><span>₹25</span></div>
-          </div>
-        </div>
+  <div class="container">
+
+    <h2>🍔 Today's Snacks</h2>
+
+    <div class="items">
+
+      <div class="item">
+        <div class="emoji">☕</div>
+        <h3>Coffee</h3>
+        <div class="price">₹15</div>
+        <button onclick="addItem('Coffee', 15)">Add to Cart</button>
       </div>
-    </section>
 
-    <section id="menu">
-      <div class="container">
-        <div class="section-head">
-          <div><h2>Snacks & drinks</h2><p>Select items and add them to your cart.</p></div>
-          <div class="chips" id="chips"></div>
-        </div>
-        <div class="menu-grid" id="menuGrid"></div>
+      <div class="item">
+        <div class="emoji">🍵</div>
+        <h3>Tea</h3>
+        <div class="price">₹10</div>
+        <button onclick="addItem('Tea', 10)">Add to Cart</button>
       </div>
-    </section>
 
-    <section id="how">
-      <div class="container">
-        <div class="section-head"><div><h2>How it works</h2><p>Made for busy college breaks.</p></div></div>
-        <div class="steps">
-          <div class="step"><div class="step-no">1</div><h3>Choose</h3><p>Pick snacks and drinks from the canteen menu.</p></div>
-          <div class="step"><div class="step-no">2</div><h3>Order</h3><p>Enter your student ID/name and choose a payment method.</p></div>
-          <div class="step"><div class="step-no">3</div><h3>Collect</h3><p>The canteen sees the order and prepares it for pickup.</p></div>
-        </div>
+      <div class="item">
+        <div class="emoji">🥟</div>
+        <h3>Samosa</h3>
+        <div class="price">₹15</div>
+        <button onclick="addItem('Samosa', 15)">Add to Cart</button>
       </div>
-    </section>
 
-    <section id="checkout">
-      <div class="container">
-        <div class="checkout">
-          <div class="checkout-grid">
-            <div>
-              <h2>Checkout & payment</h2>
-              <p class="lead">Your item rates are shown below before you place the order.</p>
-              <div class="form-grid">
-                <div class="field"><label for="studentId">Student ID</label><input id="studentId" placeholder="e.g. 24CS101" maxlength="30" /></div>
-                <div class="field"><label for="studentName">Student name</label><input id="studentName" placeholder="Your name" maxlength="60" /></div>
-                <div class="field full"><label for="pickupTime">Pickup slot</label><select id="pickupTime"><option value="Next break">Next break</option><option value="10:30 AM">10:30 AM</option><option value="12:30 PM">12:30 PM</option><option value="3:30 PM">3:30 PM</option></select></div>
-              </div>
-              <div class="paybox">
-                <h4>Payment method</h4>
-                <div class="pay-options">
-                  <label class="pay-option"><input type="radio" name="payment" value="UPI" checked /> UPI</label>
-                  <label class="pay-option"><input type="radio" name="payment" value="Cash at counter" /> Cash at counter</label>
-                </div>
-                <div class="pay-note">UPI is set up as a demo in this prototype. A real payment gateway can be connected later.</div>
-              </div>
-              <button class="btn btn-primary place-order" id="placeOrder">Place pre-order</button>
-              <div class="order-success" id="orderSuccess"></div>
-            </div>
-            <div class="summary">
-              <h3>Order summary</h3>
-              <div class="summary-list" id="checkoutSummary"></div>
-              <div class="sum-total"><span>Total</span><span id="checkoutTotal">₹0</span></div>
-            </div>
-          </div>
-        </div>
+      <div class="item">
+        <div class="emoji">🥐</div>
+        <h3>Veg Puff</h3>
+        <div class="price">₹20</div>
+        <button onclick="addItem('Veg Puff', 20)">Add to Cart</button>
       </div>
-    </section>
 
-    <section id="canteen">
-      <div class="container">
-        <div class="section-head dashboard-head">
-          <div><h2>Canteen order dashboard</h2><p>New orders added on this device appear here instantly.</p></div>
-          <button class="btn btn-light" id="clearOrders">Clear demo orders</button>
-        </div>
-        <div class="orders-table-wrap"><table class="orders-table"><thead><tr><th>Order</th><th>Student</th><th>Items</th><th>Total</th><th>Status</th></tr></thead><tbody id="ordersBody"></tbody></table></div>
+      <div class="item">
+        <div class="emoji">🍔</div>
+        <h3>Burger</h3>
+        <div class="price">₹50</div>
+        <button onclick="addItem('Burger', 50)">Add to Cart</button>
       </div>
-    </section>
-  </main>
 
-  <footer><div class="container">CampusBite • College Canteen Pre-Order Prototype</div></footer>
-  <div class="toast" id="toast"></div>
+      <div class="item">
+        <div class="emoji">🍟</div>
+        <h3>French Fries</h3>
+        <div class="price">₹40</div>
+        <button onclick="addItem('French Fries', 40)">Add to Cart</button>
+      </div>
 
-  <div class="drawer-backdrop" id="drawerBackdrop">
-    <aside class="drawer">
-      <div class="drawer-head"><div><strong style="font-size:22px">Your cart</strong><div class="muted" style="font-size:13px">Review your snacks</div></div><button class="icon-btn" id="closeCart">✕</button></div>
-      <div class="drawer-items" id="drawerItems"></div>
-      <div class="drawer-footer"><div class="row"><span class="muted">Total</span><strong id="drawerTotal">₹0</strong></div><a class="btn btn-primary" href="#checkout" id="goCheckout">Go to checkout</a></div>
-    </aside>
+    </div>
+
+    <div class="order-box">
+
+      <h2>🛒 Your Order</h2>
+
+      <div id="cart">
+        <p>Your cart is empty.</p>
+      </div>
+
+      <div class="total">
+        Total: ₹<span id="total">0</span>
+      </div>
+
+      <h2>👨‍🎓 Student Details</h2>
+
+      <input
+        type="text"
+        id="studentName"
+        placeholder="Enter your name"
+      >
+
+      <input
+        type="text"
+        id="studentId"
+        placeholder="Enter your Student ID"
+      >
+
+      <button onclick="placeOrder()">📦 Place Order</button>
+
+      <div id="message"></div>
+
+    </div>
+
   </div>
 
-<script>
-const ITEMS = [
-  {id:'coffee', name:'Filter Coffee', category:'Drinks', price:20, emoji:'☕', desc:'Hot filter coffee for a quick energy boost.'},
-  {id:'tea', name:'Tea', category:'Drinks', price:15, emoji:'🍵', desc:'Fresh hot tea for your break.'},
-  {id:'samosa', name:'Samosa', category:'Snacks', price:15, emoji:'🥟', desc:'Crispy snack with a spicy potato filling.'},
-  {id:'veg-puff', name:'Veg Puff', category:'Snacks', price:25, emoji:'🥐', desc:'Flaky puff filled with seasoned vegetables.'},
-  {id:'egg-puff', name:'Egg Puff', category:'Snacks', price:30, emoji:'🥚', desc:'Flaky puff with a seasoned egg filling.'},
-  {id:'bajji', name:'Bajji', category:'Snacks', price:20, emoji:'🍘', desc:'Crispy, hot canteen-style bajji.'},
-  {id:'lemon', name:'Lemon Juice', category:'Drinks', price:25, emoji:'🍋', desc:'Cool lemon drink for a refreshing break.'},
-  {id:'bun-butter', name:'Butter Bun', category:'Bakery', price:25, emoji:'🍞', desc:'Soft bun with a simple buttery filling.'}
-];
-let activeCategory = 'All';
-let cart = JSON.parse(localStorage.getItem('campusbite_cart') || '{}');
-let orders = JSON.parse(localStorage.getItem('campusbite_orders') || '[]');
+  <footer>
+    <p>© 2026 CampusBites | College Canteen</p>
+  </footer>
 
-const money = n => '₹' + Number(n).toFixed(0);
-const saveCart = () => localStorage.setItem('campusbite_cart', JSON.stringify(cart));
-const saveOrders = () => localStorage.setItem('campusbite_orders', JSON.stringify(orders));
-const qtyTotal = () => Object.entries(cart).reduce((t,[id,q]) => t + (ITEMS.find(i=>i.id===id)?.price||0)*q, 0);
-const totalItems = () => Object.values(cart).reduce((a,b)=>a+b,0);
-function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2300)}
-function renderChips(){
-  const cats=['All',...new Set(ITEMS.map(i=>i.category))];
-  document.getElementById('chips').innerHTML=cats.map(c=>`<button class="chip ${c===activeCategory?'active':''}" onclick="setCategory('${c}')">${c}</button>`).join('');
-}
-function setCategory(c){activeCategory=c;renderChips();renderMenu()}
-function renderMenu(){
-  const list=ITEMS.filter(i=>activeCategory==='All'||i.category===activeCategory);
-  document.getElementById('menuGrid').innerHTML=list.map(i=>`<article class="card item-card"><div class="item-visual">${i.emoji}</div><div class="item-body"><div class="item-top"><h3 class="item-name">${i.name}</h3><span class="price">${money(i.price)}</span></div><div class="item-desc">${i.desc}</div><button class="add-btn" onclick="addToCart('${i.id}')">Add to cart</button></div></article>`).join('');
-}
-function addToCart(id){cart[id]=(cart[id]||0)+1;saveCart();renderAll();toast('Added to cart')}
-function changeQty(id,delta){cart[id]=(cart[id]||0)+delta;if(cart[id]<=0)delete cart[id];saveCart();renderAll()}
-function cartItems(){return Object.entries(cart).map(([id,q])=>{const item=ITEMS.find(i=>i.id===id);return item?{...item,qty:q,subtotal:item.price*q}:null}).filter(Boolean)}
-function renderCart(){
-  document.getElementById('cartCount').textContent=totalItems();
-  const items=cartItems();
-  document.getElementById('drawerItems').innerHTML=items.length?items.map(i=>`<div class="drawer-item"><div><strong>${i.name}</strong><small>${money(i.price)} each</small></div><div class="qty-controls"><button onclick="changeQty('${i.id}',-1)">−</button><span>${i.qty}</span><button onclick="changeQty('${i.id}',1)">+</button></div><strong>${money(i.subtotal)}</strong></div>`).join(''):`<div class="empty">Your cart is empty.<br/>Add a snack from the menu.</div>`;
-  document.getElementById('drawerTotal').textContent=money(qtyTotal());
-}
-function renderSummary(){
-  const items=cartItems();
-  document.getElementById('checkoutSummary').innerHTML=items.length?items.map(i=>`<div class="summary-row"><span>${i.name}<br><small>${money(i.price)} each</small></span><span>${money(i.subtotal)}</span><span class="qty-pill">x${i.qty}</span></div>`).join(''):`<div class="empty" style="color:#bfc6da">No items yet. Add snacks from the menu.</div>`;
-  document.getElementById('checkoutTotal').textContent=money(qtyTotal());
-}
-function renderOrders(){
-  const body=document.getElementById('ordersBody');
-  if(!orders.length){body.innerHTML=`<tr><td colspan="5" class="empty">No orders yet. New student pre-orders will appear here.</td></tr>`;return}
-  body.innerHTML=orders.slice().reverse().map(o=>`<tr><td><strong>${o.id}</strong><div class="order-items">${o.time}<br/>Pickup: ${o.pickup}</div></td><td><strong>${escapeHtml(o.studentName)}</strong><div class="order-items">${escapeHtml(o.studentId)}</div></td><td><div class="order-items">${o.items.map(i=>`${escapeHtml(i.name)} × ${i.qty} (${money(i.subtotal)})`).join('<br/>')}</div></td><td><strong>${money(o.total)}</strong><div class="order-items">${o.payment}</div></td><td><select class="status-select" onchange="updateStatus('${o.id}',this.value)"><option ${o.status==='New'?'selected':''}>New</option><option ${o.status==='Preparing'?'selected':''}>Preparing</option><option ${o.status==='Ready'?'selected':''}>Ready</option><option ${o.status==='Completed'?'selected':''}>Completed</option></select><div style="margin-top:7px"><span class="status-badge ${statusClass(o.status)}">${o.status}</span></div></td></tr>`).join('');
-}
-function statusClass(s){return s==='New'?'status-new':s==='Preparing'?'status-preparing':s==='Ready'?'status-ready':'status-completed'}
-function updateStatus(id,status){const o=orders.find(x=>x.id===id);if(o){o.status=status;saveOrders();renderOrders();toast(`${id} marked ${status}`)}}
-function escapeHtml(v){return String(v).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
-function renderAll(){renderMenu();renderCart();renderSummary();renderOrders()}
-function placeOrder(){
-  const studentId=document.getElementById('studentId').value.trim();
-  const studentName=document.getElementById('studentName').value.trim();
-  const pickup=document.getElementById('pickupTime').value;
-  const payment=document.querySelector('input[name="payment"]:checked').value;
-  const items=cartItems();
-  if(!items.length){toast('Add at least one item first');document.getElementById('menu').scrollIntoView();return}
-  if(!studentId||!studentName){toast('Enter student ID and name');return}
-  const id='CB'+String(Date.now()).slice(-6);
-  const order={id,studentId,studentName,pickup,payment,items,total:qtyTotal(),status:'New',time:new Date().toLocaleString('en-IN')};
-  orders.push(order);saveOrders();cart={};saveCart();renderAll();
-  const s=document.getElementById('orderSuccess');s.innerHTML=`<strong>Order placed successfully!</strong><br/>Your order <strong>${id}</strong> has been sent to the canteen dashboard.`;s.classList.add('show');
-  toast(`Order ${id} placed`);
-  document.getElementById('drawerBackdrop').classList.remove('show');
-  document.getElementById('canteen').scrollIntoView({behavior:'smooth'});
-}
 
-document.getElementById('openCart').onclick=()=>document.getElementById('drawerBackdrop').classList.add('show');
-document.getElementById('closeCart').onclick=()=>document.getElementById('drawerBackdrop').classList.remove('show');
-document.getElementById('drawerBackdrop').addEventListener('click',e=>{if(e.target.id==='drawerBackdrop')e.currentTarget.classList.remove('show')});
-document.getElementById('goCheckout').onclick=()=>document.getElementById('drawerBackdrop').classList.remove('show');
-document.getElementById('placeOrder').onclick=placeOrder;
-document.getElementById('clearOrders').onclick=()=>{if(confirm('Clear all demo orders?')){orders=[];saveOrders();renderOrders();toast('Demo orders cleared')}};
-window.addEventListener('storage',e=>{if(e.key==='campusbite_orders'){orders=JSON.parse(e.newValue||'[]');renderOrders();toast('New canteen order received')}});
-renderAll();
-</script>
+  <script>
+
+    let cart = [];
+    let total = 0;
+
+    function addItem(name, price) {
+
+      cart.push({
+        name: name,
+        price: price
+      });
+
+      total += price;
+
+      updateCart();
+    }
+
+
+    function updateCart() {
+
+      const cartDiv = document.getElementById("cart");
+
+      if (cart.length === 0) {
+        cartDiv.innerHTML = "<p>Your cart is empty.</p>";
+        document.getElementById("total").innerText = "0";
+        return;
+      }
+
+      cartDiv.innerHTML = "";
+
+      cart.forEach((item, index) => {
+
+        cartDiv.innerHTML += `
+          <div class="cart-item">
+            <span>${item.name}</span>
+            <span>₹${item.price}</span>
+          </div>
+        `;
+
+      });
+
+      document.getElementById("total").innerText = total;
+    }
+
+
+    function placeOrder() {
+
+      const name =
+        document.getElementById("studentName").value.trim();
+
+      const studentId =
+        document.getElementById("studentId").value.trim();
+
+      const message =
+        document.getElementById("message");
+
+
+      if (name === "" || studentId === "") {
+
+        message.style.color = "red";
+        message.innerText =
+          "Please enter your name and Student ID.";
+
+        return;
+      }
+
+
+      if (cart.length === 0) {
+
+        message.style.color = "red";
+        message.innerText =
+          "Please add at least one item to your cart.";
+
+        return;
+      }
+
+
+      const orderNumber =
+        Math.floor(1000 + Math.random() * 9000);
+
+
+      message.style.color = "green";
+
+      message.innerText =
+        "✅ Order placed successfully! " +
+        "Order No: CB" + orderNumber;
+
+
+      cart = [];
+      total = 0;
+
+      updateCart();
+
+      document.getElementById("studentName").value = "";
+      document.getElementById("studentId").value = "";
+    }
+
+  </script>
+
 </body>
 </html>
